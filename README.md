@@ -1,6 +1,8 @@
 # Renew3D
 A simple, cheap and (hopefully) reliable 3D printer.
 
+![render](images/render_banner.png)
+
 ###### What kind of name is this?
 I built my first 3D printer a couple of years ago, but there was no assembly,
 only parts from thingiverse, etc. Then I had an idea to make a new printer with
