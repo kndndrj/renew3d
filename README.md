@@ -2,27 +2,65 @@
 A simple, cheap and (hopefully) reliable 3D printer.
 
 ###### What kind of name is this?
-I built my first 3D printer a couple of years ago, but there was no assembly, only parts from thingiverse, etc.
-Then I had an idea to make a new printer with extra features, but the project became *waaay* to complicated (check it [here](https://github.com/kndndrj/complicator-3000)).
-So this printer here, is a "renewed" version of those two (quite bad, I know).
+I built my first 3D printer a couple of years ago, but there was no assembly,
+only parts from thingiverse, etc. Then I had an idea to make a new printer with
+extra features, but the project became *waaay* to complicated (check it
+[here](https://github.com/kndndrj/complicator-3000)). So this printer here, is
+a "renewed" version of those two (quite bad, I know).
 
-#### Getting Started
-The files for this printer are available in `.f3d`, `.step` and `.stl` formats. If you want to assemble the printer, I suggest that you check [`assembly.f3z`](cad/assembly.f3z) (alternatively `assembly.step`) first, and check what materials to buy and what parts to print.
-Then look into the [`printed_parts`](cad/printed_parts) directory and browse files in different formats.
-If you have a sensor, board, hotend, etc. check the `extras` directory.
+## Getting Started
+The files for this printer are available in `.f3d`, `.step` and `.stl` formats.
+If you want to assemble the printer, I suggest that you check
+[`assembly.f3z`](cad/assembly.f3z) (alternatively `assembly.step`) first, and
+check what materials to buy and what parts to print. Then look into the
+[`printed_parts`](cad/printed_parts) directory and browse files in different
+formats. If you have a sensor, board, hotend, etc. check the `extras`
+directory.
 
-#### Development
+## Firmware Uploading (Linux)
+You can use any firmware you like, here is just my example config using Marlin
+2.0.x for Ramps board with mega 2560.
 
-###### Specific Components
-If you are creating a new specific part (like SKR 1.3), put it in the `extras` directory. If it's made of multiple bodies, export the whole file as `.f3d` and `.step`. Then export separate bodies (only printable parts) as `.stl`.
+1. Download Marlin Firmware [here](https://github.com/MarlinFirmware/Marlin).
+2. Install platformio (example on Arch Linux):
+	```sh
+	$ paru -S platformio
+	```
+3. Go to the downloaded firmware directory and replace `Marlin/Configuration.h`
+   and `Marlin/Configuration_adv.h` with files from [`firmware`](firmware) in
+   this repository.
+4. Plug in the printer and run:
+	```sh
+	$ platformio run --target upload -e mega2560
+	```
 
-###### Main Assembly
-For main assembly, use only the `assembly.f3z` when developing. then export the modified printable parts in all formats and put them in `main_assembly` directory.
+#### Note on cheap Chinese boards
+Try these steps (stop when you get it to work):
+- Install `i2c-ch341-dkms` from AUR.
+- Disable udev rules:
+	```
+	/usr/lib/udev/rules.d/90-brltty-device.rules
+	/usr/lib/udev/rules.d/90-brltty-uinput.rules
+	```
+- Specify `upload_port = /dev/ttyUSB0` in `ini/avr.ini`
 
+## Development
 
-#### Credits
+#### Specific Components
+If you are creating a new specific part (like SKR 1.3), put it in the `extras`
+directory. If it's made of multiple bodies, export the whole file as `.f3d` and
+`.step`. Then export separate bodies (only printable parts) as `.stl`.
 
-###### Standard Parts 3D Models:
+#### Main Assembly
+For main assembly, use only the `assembly.f3z` when developing. then export the
+modified printable parts in all formats and put them in `main_assembly`
+directory.
+
+####
+
+## Credits
+
+#### Standard Parts 3D Models:
 
 **NOTE:** I'm not the owner of any of the following "standard" parts.
 
@@ -43,7 +81,7 @@ For main assembly, use only the `assembly.f3z` when developing. then export the 
 - [ramps_lcd_adapter](https://grabcad.com/library/smart-adapter-conector-lcd-ramps-1-4-1)
 - [SSR_40_DA](https://grabcad.com/library/ssr-40-da-1)
 
-###### Printed Parts:
+#### Printed Parts:
 
 - [part_cooling_fan_duct](https://www.thingiverse.com/thing:3063554) - changed only text
 - [x_idler & x_motor_holder](https://www.thingiverse.com/thing:1103976) - fork
