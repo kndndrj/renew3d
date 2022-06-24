@@ -3,6 +3,8 @@ A simple, cheap and (hopefully) reliable 3D printer.
 
 ![render](images/render_banner.png)
 
+[More images here.](images/)
+
 ###### What kind of name is this?
 I built my first 3D printer a couple of years ago, but there was no assembly,
 only parts from thingiverse, etc. Then I had an idea to make a new printer with
@@ -57,8 +59,6 @@ directory. If it's made of multiple bodies, export the whole file as `.f3d` and
 For main assembly, use only the `assembly.f3z` when developing. then export the
 modified printable parts in all formats and put them in `main_assembly`
 directory.
-
-####
 
 ## Credits
 
